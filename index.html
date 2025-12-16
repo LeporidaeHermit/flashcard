@@ -1,90 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Russian → English Flashcards</title>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #111;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-
-    .card {
-        width: 360px;
-        min-height: 180px;
-        background: #1e1e1e;
-        border-radius: 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        font-size: 28px;
-        text-align: center;
-        cursor: pointer;
-        user-select: none;
-        transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .card:hover {
-        transform: scale(1.03);
-        background: #252525;
-    }
-
-    .hint {
-        position: absolute;
-        bottom: 30px;
-        font-size: 14px;
-        opacity: 0.6;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>Russian → English Flashcards</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<div class="controls">
+    <label>
+        <input type="radio" name="mode" value="normal" checked>
+        Normal
+    </label>
+    <label>
+        <input type="radio" name="mode" value="random">
+        Random
+    </label>
+    |
+    From <input id="from" type="number" min="1" value="1">
+    to <input id="to" type="number" min="1" value="9">
+</div>
+
 <div id="card" class="card"></div>
-<div class="hint">Click to reveal • Click again for next</div>
 
-<script>
-const flashcards = [
-    { ru: "и", en: "and" },
-    { ru: "в (во)", en: "(+prep) in; (+acc) into, to" },
-    { ru: "не", en: "not" },
-    { ru: "на", en: "(+prep) on, at; (+acc) onto, to" },
-    { ru: "я", en: "I" },
-    { ru: "он", en: "he" },
-    { ru: "что", en: "what, that" },
-    { ru: "с (со)", en: "(+inst) with; (+gen) from, off" },
-    { ru: "это", en: "this, that, it" }
-];
+<div class="actions">
+    <button id="skipBtn" class="square-btn">S</button>
+    <button id="resetBtn" class="square-btn danger">R</button>
+</div>
 
-let index = 0;
-let revealed = false;
-const card = document.getElementById("card");
+<div class="hint">
+    Click card to reveal / next • S = skip word • R = reset
+</div>
 
-function showRussian() {
-    card.textContent = flashcards[index].ru;
-    revealed = false;
-}
-
-card.addEventListener("click", () => {
-    if (!revealed) {
-        card.textContent = flashcards[index].en;
-        revealed = true;
-    } else {
-        index = (index + 1) % flashcards.length;
-        showRussian();
-    }
-});
-
-showRussian();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
