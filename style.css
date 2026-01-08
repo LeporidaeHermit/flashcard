@@ -96,5 +96,14 @@ body {
     color: #666;
 }
 
+#answerInput {
+    margin-top: 14px;
+    width: 360px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    text-align: center;
+}
 
 
