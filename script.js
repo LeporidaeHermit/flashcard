@@ -198,7 +198,6 @@ const flashcards = [
 { ru: "сто", en: "hundred" }
 
 ];
-
 /* ===== STATE ===== */
 let mode = "normal";
 let index = 0;
@@ -218,6 +217,7 @@ const toInput = document.getElementById("to");
 const skipBtn = document.getElementById("skipBtn");
 const resetBtn = document.getElementById("resetBtn");
 const modeInputs = document.querySelectorAll('input[name="mode"]');
+const answerInput = document.getElementById("answerInput");
 
 /* ===== UTILITIES ===== */
 function shuffle(arr) {
@@ -268,6 +268,7 @@ function showRussian() {
     if (activeCards.length === 0) {
         card.textContent = "All words in this range are known ✔";
         skipBtn.classList.remove("active");
+        answerInput.value = "";
         return;
     }
 
@@ -275,9 +276,14 @@ function showRussian() {
     card.textContent = current.ru;
     skipBtn.classList.toggle("active", knownSet.has(current.ru));
     revealed = false;
+
+    answerInput.value = "";
+    answerInput.focus();
 }
 
 /* ===== EVENTS ===== */
+
+/* Click card: reveal / next */
 card.addEventListener("click", () => {
     if (!activeCards.length) return;
 
@@ -290,6 +296,25 @@ card.addEventListener("click", () => {
     }
 });
 
+/* Typing answer + Enter */
+answerInput.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    if (!activeCards.length) return;
+
+    const current = getCurrentCard();
+    const typed = answerInput.value.trim().toLowerCase();
+    const correct = current.en.toLowerCase();
+
+    if (typed === correct) {
+        index = (index + 1) % activeCards.length;
+        showRussian();
+    } else {
+        card.textContent = `${current.en} ❌`;
+        revealed = true;
+    }
+});
+
+/* Skip / mark known */
 skipBtn.addEventListener("click", () => {
     const current = getCurrentCard();
     if (!current) return;
@@ -304,12 +329,14 @@ skipBtn.addEventListener("click", () => {
     rebuildActiveCards();
 });
 
+/* Reset known words */
 resetBtn.addEventListener("click", () => {
     knownSet.clear();
     localStorage.removeItem("knownWords");
     rebuildActiveCards();
 });
 
+/* Mode change */
 modeInputs.forEach(input => {
     input.addEventListener("change", () => {
         mode = input.value;
@@ -317,6 +344,7 @@ modeInputs.forEach(input => {
     });
 });
 
+/* Range change */
 fromInput.addEventListener("change", rebuildActiveCards);
 toInput.addEventListener("change", rebuildActiveCards);
 
