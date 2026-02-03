@@ -2,49 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Russian → English Flashcards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russian Flashcards</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="controls">
-    <label>
-        <input type="radio" name="mode" value="normal" checked>
-        Normal
-    </label>
-    <label>
-        <input type="radio" name="mode" value="random">
-        Random
-    </label>
-    |
-    From <input id="from" type="number" min="1" value="1">
-    to <input id="to" type="number" min="1" value="9">
+    <label><input type="radio" name="mode" value="normal" checked> Normal</label>
+    <label><input type="radio" name="mode" value="random"> Random</label>
+    <div class="range-inputs">
+        From <input id="from" type="number" min="1" value="1"> 
+        to <input id="to" type="number" min="1" value="14">
+    </div>
 </div>
 
-<div id="card" class="card"></div>
+<div id="card" class="card">Loading...</div>
 
-
-<input
-    id="answerInput"
-    type="text"
-    placeholder="Type English translation and press Enter"
-    autocomplete="off"
-/>
+<input id="answerInput" type="text" placeholder="Tap to type translation" autocomplete="off" />
 
 <div class="actions">
-    <button id="skipBtn" class="square-btn">S</button>
-    <button id="resetBtn" class="square-btn danger">R</button>
+    <button id="skipBtn" class="square-btn" title="Skip/Mark Known">✓</button>
+    <button id="resetBtn" class="square-btn danger" title="Reset All">↺</button>
 </div>
 
-<div class="hint">
-    Click card to reveal / next • S = skip word • R = reset
-</div>
+<div class="hint">Tap card for answer • Enter to check • ✓ to master</div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
