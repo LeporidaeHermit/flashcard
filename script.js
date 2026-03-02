@@ -256,7 +256,7 @@ function rebuildActiveCards() {
     let to = parseInt(toInput.value);
     from = Math.max(1, from);
     to = Math.min(data.length, to);
-    if (from > to) from = to;
+    if (from > to) to = from;
 
     fromInput.value = from;
     toInput.value = to;
@@ -381,5 +381,6 @@ document.querySelectorAll('input[name="mode"]').forEach(i => {
 /* ===== INIT ===== */
 loadKnownWords();
 rebuildActiveCards();
+
 
 
