@@ -281,22 +281,19 @@ function getCurrentCard() {
 
 function showCard() {
     if (activeCards.length === 0) {
-        card.textContent = "All Done! 🏆";
+        card.innerHTML = "All Done! 🏆";
         answerInput.value = "";
         skipBtn.classList.remove("active");
         return;
     }
     const current = getCurrentCard();
-    
-    // Get the original index in the full dataset
     const data = datasets[currentLang];
     const wordIndex = data.findIndex(c => c.q === current.q);
-    document.getElementById("cardNumber").textContent = wordIndex + 1;
-    
-    card.textContent = current.q;
+
+    card.innerHTML = `<span class="card-number">${wordIndex + 1}</span>${current.q}`;
     revealed = false;
     answerInput.value = "";
-    
+
     if (knownSet.has(current.q)) {
         skipBtn.classList.add("active");
     } else {
@@ -321,7 +318,10 @@ langSelect.addEventListener("change", (e) => {
 card.addEventListener("click", () => {
     if (!activeCards.length) return;
     if (!revealed) {
-        card.textContent = getCurrentCard().a;
+        const current = getCurrentCard();
+        const data = datasets[currentLang];
+        const wordIndex = data.findIndex(c => c.q === current.q);
+        card.innerHTML = `<span class="card-number">${wordIndex + 1}</span>${current.a}`;
         revealed = true;
     } else {
         index = (index + 1) % activeCards.length;
@@ -398,6 +398,7 @@ toInput.addEventListener("change", () => {
 /* ===== INIT ===== */
 loadKnownWords();
 rebuildActiveCards();
+
 
 
 
