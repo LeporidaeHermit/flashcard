@@ -122,3 +122,15 @@ input[type="number"] {
     font-size: 13px;
     color: #888;
 }
+.card {
+    position: relative; /* add this to existing .card rule */
+}
+
+.card-number {
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    font-size: 14px;
+    color: #aaa;
+    font-weight: 500;
+}
