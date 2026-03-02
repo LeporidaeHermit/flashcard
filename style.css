@@ -61,6 +61,7 @@ input[type="number"] {
 }
 
 .card {
+    position: relative; /* add this to existing .card rule */
     width: 100%;
     aspect-ratio: 16 / 10; /* Slightly taller for Kanji legibility */
     background: #ffffff;
@@ -122,9 +123,7 @@ input[type="number"] {
     font-size: 13px;
     color: #888;
 }
-.card {
-    position: relative; /* add this to existing .card rule */
-}
+ 
 
 .card-number {
     position: absolute;
@@ -134,3 +133,4 @@ input[type="number"] {
     color: #aaa;
     font-weight: 500;
 }
+
