@@ -287,11 +287,16 @@ function showCard() {
         return;
     }
     const current = getCurrentCard();
+    
+    // Get the original index in the full dataset
+    const data = datasets[currentLang];
+    const wordIndex = data.findIndex(c => c.q === current.q);
+    document.getElementById("cardNumber").textContent = wordIndex + 1;
+    
     card.textContent = current.q;
     revealed = false;
     answerInput.value = "";
     
-    // Check if user already marked it (edge case)
     if (knownSet.has(current.q)) {
         skipBtn.classList.add("active");
     } else {
@@ -393,6 +398,7 @@ toInput.addEventListener("change", () => {
 /* ===== INIT ===== */
 loadKnownWords();
 rebuildActiveCards();
+
 
 
 
