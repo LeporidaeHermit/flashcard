@@ -376,11 +376,24 @@ resetBtn.addEventListener("click", () => {
 document.querySelectorAll('input[name="mode"]').forEach(i => {
     i.addEventListener("change", e => { mode = e.target.value; rebuildActiveCards(); });
 });
-[fromInput, toInput].forEach(i => i.addEventListener("change", rebuildActiveCards));
+fromInput.addEventListener("change", () => {
+    let from = parseInt(fromInput.value);
+    let to = parseInt(toInput.value);
+    if (from > to) toInput.value = from;
+    rebuildActiveCards();
+});
+
+toInput.addEventListener("change", () => {
+    let from = parseInt(fromInput.value);
+    let to = parseInt(toInput.value);
+    if (to < from) fromInput.value = to;
+    rebuildActiveCards();
+});
 
 /* ===== INIT ===== */
 loadKnownWords();
 rebuildActiveCards();
+
 
 
 
